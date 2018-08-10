@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 /**
+ * 获取事务协调器信息
  * Created by lorne on 2017/7/1.
  */
 @RestController
@@ -28,18 +29,28 @@ public class AdminController {
     @Autowired
     private ApiModelService apiModelService;
 
-
+    /***
+     * 获取在线模块
+     * @return
+     */
     @RequestMapping(value = "/onlines", method = RequestMethod.GET)
     public List<ModelInfo> onlines() {
         return apiModelService.onlines();
     }
 
-
+    /***
+     * 协调服务器与客户端的通讯的状态
+     * @return
+     */
     @RequestMapping(value = "/setting", method = RequestMethod.GET)
     public TxState setting() {
         return apiAdminService.getState();
     }
 
+    /***
+     * 查询补偿事务永久存储数据
+     * @return
+     */
     @RequestMapping(value = "/json", method = RequestMethod.GET)
     public String json() {
         return apiAdminService.loadNotifyJson();
@@ -50,17 +61,32 @@ public class AdminController {
         return apiAdminService.modelList();
     }
 
+    /***
+     * 根据模块名查询补偿事务永久存储数据
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/modelTimes", method = RequestMethod.GET)
     public List<String> modelTimes(@RequestParam("model") String model) {
         return apiAdminService.modelTimes(model);
     }
 
-
+    /***
+     * 根据路径名查询补偿事务永久存储数据
+     * @param path
+     * @return
+     */
     @RequestMapping(value = "/modelInfos", method = RequestMethod.GET)
     public List<TxModel> modelInfos(@RequestParam("path") String path) {
         return apiAdminService.modelInfos(path);
     }
 
+    /***
+     *
+     * @param path
+     * @return
+     * @throws ServiceException
+     */
     @RequestMapping(value = "/compensate", method = RequestMethod.GET)
     public boolean compensate(@RequestParam("path") String path) throws ServiceException {
         return apiAdminService.compensate(path);

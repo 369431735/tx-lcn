@@ -3,6 +3,7 @@ package com.codingapi.tm.model;
 import java.util.List;
 
 /**
+ *  协调服务器与客户端的通讯的状态
  * Created by lorne on 2017/7/1.
  */
 public class TxState {

@@ -27,6 +27,10 @@ public class ModelInfoManager {
         return manager;
     }
 
+    /**
+     * 根据渠道名移除模块
+     * @param channelName
+     */
     public void removeModelInfo(String channelName) {
         for (ModelInfo modelInfo : modelInfos) {
             if (channelName.equalsIgnoreCase(modelInfo.getChannelName())) {
@@ -35,7 +39,10 @@ public class ModelInfoManager {
         }
     }
 
-
+    /***
+     * 新增模块信息
+     * @param minfo
+     */
     public void addModelInfo(ModelInfo minfo) {
         for (ModelInfo modelInfo : modelInfos) {
             if (minfo.getChannelName().equalsIgnoreCase(modelInfo.getChannelName())) {
@@ -49,10 +56,19 @@ public class ModelInfoManager {
         modelInfos.add(minfo);
     }
 
+    /***
+     * 获取机器上所有模块
+     * @return
+     */
     public List<ModelInfo> getOnlines() {
         return modelInfos;
     }
 
+    /***
+     * 根据渠道名获取模块信息
+     * @param channelName
+     * @return
+     */
     public ModelInfo getModelByChannelName(String channelName) {
         for (ModelInfo modelInfo : modelInfos) {
             if (channelName.equalsIgnoreCase(modelInfo.getChannelName())) {
@@ -62,6 +78,11 @@ public class ModelInfoManager {
         return null;
     }
 
+    /***
+     * 根据模块名获取模块信息
+     * @param model
+     * @return
+     */
     public ModelInfo getModelByModel(String model) {
         for (ModelInfo modelInfo : modelInfos) {
             if (model.equalsIgnoreCase(modelInfo.getModel())) {

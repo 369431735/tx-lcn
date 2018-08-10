@@ -3,23 +3,30 @@ package com.codingapi.tm.compensate.model;
 import com.codingapi.tm.netty.model.TxGroup;
 
 /**
+ * 事务补偿消息
  * create by lorne on 2017/11/11
  */
 public class TransactionCompensateMsg {
-
+      //当前时间
     private long currentTime;
+      //组Id
     private String groupId;
+      //模型
     private String model;
+      //地址
     private String address;
+    //唯一组件
     private String uniqueKey;
+      //类名
     private String className;
+       //方法
     private String methodStr;
     private String data;
     private int time;
     private int startError;
-
+       //事务组
     private TxGroup txGroup;
-
+       //状态
     private int state;
 
 

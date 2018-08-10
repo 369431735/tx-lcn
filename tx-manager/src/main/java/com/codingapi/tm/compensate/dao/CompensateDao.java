@@ -8,7 +8,11 @@ import java.util.List;
  * create by lorne on 2017/11/11
  */
 public interface CompensateDao {
-
+    /**
+     * 储存补偿信息
+     * @param transactionCompensateMsg
+     * @return
+     */
     String saveCompensateMsg(TransactionCompensateMsg transactionCompensateMsg);
 
     List<String> loadCompensateKeys();
