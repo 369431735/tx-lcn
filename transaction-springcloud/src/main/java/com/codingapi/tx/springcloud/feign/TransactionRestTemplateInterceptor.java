@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
+ * 全局请求拦截
  * Created by lorne on 2017/6/26.
  */
 public class TransactionRestTemplateInterceptor implements RequestInterceptor {

@@ -5,12 +5,14 @@ import com.codingapi.tx.model.TransactionInvocation;
 
 
 /**
- * 切面控制对象
+ * 分布式事务信息
  * Created by lorne on 2017/6/8.
  */
 public class TxTransactionInfo {
 
-
+    /**
+     * 注解
+     */
     private TxTransaction transaction;
 
 

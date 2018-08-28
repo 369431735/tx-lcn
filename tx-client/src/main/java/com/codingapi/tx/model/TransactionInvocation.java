@@ -3,6 +3,7 @@ package com.codingapi.tx.model;
 import java.io.Serializable;
 
 /**
+ * 分布式事务调用器
  * create by lorne on 2017/11/11
  */
 public class TransactionInvocation  implements Serializable{
