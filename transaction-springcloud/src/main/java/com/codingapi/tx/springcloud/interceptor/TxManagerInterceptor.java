@@ -16,7 +16,9 @@ import javax.servlet.http.HttpServletRequest;
 
 @Component
 public class TxManagerInterceptor {
-
+    /***
+     * 前切面
+     */
     @Autowired
     private AspectBeforeService aspectBeforeService;
 

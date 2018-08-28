@@ -40,7 +40,10 @@ public class SocketManager {
 
     private final static int max_size = 50;
 
-
+    /**
+     * 获取SocketManager
+     * @return
+     */
     public static SocketManager getInstance() {
         if (manager == null){
             synchronized (SocketManager.class){

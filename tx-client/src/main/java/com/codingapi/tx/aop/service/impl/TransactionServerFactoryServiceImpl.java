@@ -37,7 +37,13 @@ public class TransactionServerFactoryServiceImpl implements TransactionServerFac
     @Autowired
     private ILCNTransactionControl transactionControl;
 
-
+    /***
+     * 创建分布式事务
+     * @param info
+     * @return
+     * @throws Throwable
+     */
+    @Override
     public TransactionServer createTransactionServer(TxTransactionInfo info) throws Throwable {
 
 

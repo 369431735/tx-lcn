@@ -5,11 +5,15 @@ package com.codingapi.tm.model;
  * create by lorne on 2017/12/5
  */
 public class LoadBalanceInfo {
-
+    /**
+     * 组id
+     */
     private String groupId;
 
     private String key;
-
+    /**
+     * 数据
+     */
     private String data;
 
 

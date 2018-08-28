@@ -19,6 +19,10 @@ public class ServerListener implements ApplicationListener<EmbeddedServletContai
     @Autowired
     private InitService initService;
 
+    /**
+     * 不知道写这个干嘛 似乎只是想打印一些欢迎语
+     * @param event
+     */
     @Override
     public void onApplicationEvent(EmbeddedServletContainerInitializedEvent event) {
         logger.info("onApplicationEvent -> onApplicationEvent. "+event.getEmbeddedServletContainer());

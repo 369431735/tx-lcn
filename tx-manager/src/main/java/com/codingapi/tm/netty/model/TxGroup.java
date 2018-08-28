@@ -32,7 +32,9 @@ public class TxGroup {
      * 是否强制回滚(1:开启，0:关闭)
      */
     private int rollback = 0 ;
-
+    /**
+     * 事务信息
+     */
     private List<TxInfo> list;
 
     public TxGroup() {

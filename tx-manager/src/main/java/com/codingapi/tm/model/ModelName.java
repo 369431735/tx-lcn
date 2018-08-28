@@ -6,7 +6,9 @@ package com.codingapi.tm.model;
  * create by lorne on 2017/11/22
  */
 public class ModelName {
-
+    /**
+     * 名称
+     */
     private String name;
     private int count;
 

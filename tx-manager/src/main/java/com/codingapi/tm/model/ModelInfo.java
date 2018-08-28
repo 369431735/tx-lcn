@@ -5,11 +5,17 @@ package com.codingapi.tm.model;
  * create by lorne on 2017/11/13
  */
 public class ModelInfo {
-
+    /**
+     * 模块名
+     */
     private String model;
-
+    /***
+     * ip地址
+     */
     private String ipAddress;
-
+    /**
+     * 管道名
+     */
     private String channelName;
 
     private String uniqueKey;

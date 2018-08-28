@@ -11,6 +11,7 @@ import org.springframework.http.client.ClientHttpResponse;
 import java.io.IOException;
 
 /**
+ * 事务http请求拦截器
  * Created by lorne on 2017/7/3.
  */
 public class TransactionHttpRequestInterceptor implements ClientHttpRequestInterceptor {

@@ -19,7 +19,9 @@ import org.springframework.stereotype.Component;
 public class TransactionAspect implements Ordered {
 
     private Logger logger = LoggerFactory.getLogger(TransactionAspect.class);
-
+    /**
+     * 分布式事务拦截器
+     */
     @Autowired
     private TxManagerInterceptor txManagerInterceptor;
 

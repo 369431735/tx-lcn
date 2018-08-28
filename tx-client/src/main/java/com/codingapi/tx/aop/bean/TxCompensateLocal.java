@@ -7,11 +7,17 @@ package com.codingapi.tx.aop.bean;
 public class TxCompensateLocal {
 
     private final static ThreadLocal<TxCompensateLocal> currentLocal = new InheritableThreadLocal<TxCompensateLocal>();
-
+    /**
+     * 组id
+     */
     private String groupId;
-
+    /***
+     * 类型
+     */
     private String type;
-
+    /**
+     * 开始状态
+     */
     private int startState;
 
 

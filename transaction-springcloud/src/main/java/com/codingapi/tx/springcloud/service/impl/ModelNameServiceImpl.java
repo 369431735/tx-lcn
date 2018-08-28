@@ -63,13 +63,20 @@ public class ModelNameServiceImpl implements ModelNameService {
         return port;
     }
 
+    /***
+     * 获取唯一key
+     * @return
+     */
     @Override
     public String getUniqueKey() {
         String address = getIp() + getPort();
         return MD5Util.md5(address.getBytes());
     }
 
-
+    /**
+     * 获取地址
+     * @return
+     */
     @Override
     public String getIpAddress() {
         String address = getIp() + ":" + getPort();

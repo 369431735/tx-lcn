@@ -9,14 +9,21 @@ import org.apache.commons.lang.StringUtils;
 
 /**
  * create by lorne on 2017/8/7
+ * 渠道发送者
  */
 public class ChannelSender {
 
-
+    /***
+     * 管道
+     */
     private Channel channel;
-
+    /**
+     * 地址
+     */
     private String address;
-
+    /***
+     * 模块名
+     */
     private String modelName;
 
     public void setModelName(String modelName) {
