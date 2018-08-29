@@ -11,8 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
+ * 目前只看到了对数据库的代理
  * create by lorne on 2017/8/22
  */
 
@@ -35,7 +37,7 @@ public abstract class AbstractResourceProxy<C,T extends ILCNResource> implements
     //default time (seconds)
     protected int maxWaitTime = 30;
 
-    protected volatile int nowCount = 0;
+    protected volatile AtomicInteger nowCount=new AtomicInteger(0);
 
 
     protected volatile boolean hasTransaction = false;
@@ -57,7 +59,7 @@ public abstract class AbstractResourceProxy<C,T extends ILCNResource> implements
             }
 
             pools.remove(connection.getGroupId());
-            nowCount--;
+            nowCount.decrementAndGet();
         }
     };
 
@@ -95,7 +97,7 @@ public abstract class AbstractResourceProxy<C,T extends ILCNResource> implements
 
 
     private C createConnection(TxTransactionLocal txTransactionLocal, C connection){
-        if (nowCount == maxCount) {
+        if (nowCount.get() == maxCount) {
             for (int i = 0; i < maxWaitTime; i++) {
                 for(int j=0;j<100;j++){
                     try {
@@ -103,12 +105,12 @@ public abstract class AbstractResourceProxy<C,T extends ILCNResource> implements
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    if (nowCount < maxCount) {
+                    if (nowCount.get() < maxCount) {
                         return createLcnConnection(connection, txTransactionLocal);
                     }
                 }
             }
-        } else if (nowCount < maxCount) {
+        } else if (nowCount.get() < maxCount) {
             return createLcnConnection(connection, txTransactionLocal);
         } else {
             logger.info("connection was overload");

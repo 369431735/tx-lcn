@@ -26,14 +26,12 @@ public class DataSourceServiceImpl implements DataSourceService {
         if (rs == 1 || rs == 0) {
             waitTask.setState(rs);
             waitTask.signalTask();
-
             return;
         }
         rs = txManagerService.cleanNotifyTransactionHttp(groupId, waitTaskId);
         if (rs == 1 || rs == 0) {
             waitTask.setState(rs);
             waitTask.signalTask();
-
             return;
         }
 

@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.Executor;
+import java.util.concurrent.*;
 
 
 /**
@@ -46,6 +46,7 @@ public class LCNDBConnection extends AbstractTransactionThread implements LCNCon
 
     private boolean readOnly = false;
 
+    private  ScheduledExecutorService pool = Executors.newScheduledThreadPool(10);
 
     public LCNDBConnection(Connection connection, DataSourceService dataSourceService, ICallClose<ILCNResource> runnable) {
         logger.debug("init lcn connection ! ");
@@ -87,7 +88,7 @@ public class LCNDBConnection extends AbstractTransactionThread implements LCNCon
 
         isClose.set(true);
     }
-
+    @Override
     protected void closeConnection() throws SQLException {
         runnable.close(this);
         connection.close();
@@ -137,7 +138,7 @@ public class LCNDBConnection extends AbstractTransactionThread implements LCNCon
     protected void rollbackConnection() throws SQLException {
         connection.rollback();
     }
-
+    @Override
     public void transaction() throws SQLException {
         if (waitTask == null) {
             rollbackConnection();
@@ -147,21 +148,19 @@ public class LCNDBConnection extends AbstractTransactionThread implements LCNCon
 
 
         //start 结束就是全部事务的结束表示,考虑start挂掉的情况
-        Timer timer = new Timer();
+        //todo  waitTask.awaitTask();可能没有唤醒的地方
         System.out.println(" maxOutTime : "+maxOutTime);
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                System.out.println("auto execute ,groupId:" + getGroupId());
-                dataSourceService.schedule(getGroupId(), waitTask);
-            }
-        }, maxOutTime);
+        pool.scheduleWithFixedDelay(()->{
+            System.out.println("auto execute ,groupId:" + getGroupId());
+            dataSourceService.schedule(getGroupId(), waitTask);},
+                0, maxOutTime, TimeUnit.SECONDS);
+
 
         System.out.println("transaction is wait for TxManager notify, groupId : " + getGroupId());
 
         waitTask.awaitTask();
 
-        timer.cancel();
+      //  timer.cancel();
 
         int rs = waitTask.getState();
 
@@ -185,11 +184,11 @@ public class LCNDBConnection extends AbstractTransactionThread implements LCNCon
         waitTask.remove();
 
     }
-
+    @Override
     public String getGroupId() {
         return groupId;
     }
-
+    @Override
     public TxTask getWaitTask() {
         return waitTask;
     }

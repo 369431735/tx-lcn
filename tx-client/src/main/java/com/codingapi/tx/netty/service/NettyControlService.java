@@ -4,6 +4,7 @@ import io.netty.channel.ChannelHandlerContext; /**
  * create by lorne on 2017/11/11
  */
 public interface NettyControlService {
+
     void restart();
 
 

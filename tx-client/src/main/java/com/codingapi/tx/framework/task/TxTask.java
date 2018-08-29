@@ -5,6 +5,7 @@ import com.lorne.core.framework.utils.task.Task;
 
 /**
  * create by lorne on 2017/8/22
+ * 事务任务
  */
 public class TxTask extends Task{
 

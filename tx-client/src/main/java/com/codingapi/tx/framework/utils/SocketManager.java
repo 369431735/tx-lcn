@@ -118,12 +118,8 @@ public class SocketManager {
                 }
             }, delay, TimeUnit.SECONDS);
 
-            threadPool.execute(new Runnable() {
-                @Override
-                public void run() {
-                    sleepSend(task, request);
-                }
-            });
+            threadPool.execute(()->{sleepSend(task, request);});
+
 
             task.awaitTask();
 

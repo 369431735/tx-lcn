@@ -27,7 +27,7 @@ public class LCNTransactionDataSource extends AbstractResourceProxy<Connection,L
 
     @Override
     protected Connection createLcnConnection(Connection connection, TxTransactionLocal txTransactionLocal) {
-        nowCount++;
+        nowCount.getAndIncrement();
         if(txTransactionLocal.isHasStart()){
             LCNStartConnection lcnStartConnection = new LCNStartConnection(connection,subNowCount);
             logger.debug("get new start connection - > "+txTransactionLocal.getGroupId());

@@ -9,6 +9,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 /**
+ * 获取配置
  * create by lorne on 2017/11/13
  */
 @Component

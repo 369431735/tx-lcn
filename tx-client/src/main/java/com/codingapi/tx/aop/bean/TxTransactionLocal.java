@@ -43,7 +43,7 @@ public class TxTransactionLocal {
 
 
     private String kid;
-
+     //目前看到的只有"datasource"
     private String type;
 
     private boolean readOnly = false;

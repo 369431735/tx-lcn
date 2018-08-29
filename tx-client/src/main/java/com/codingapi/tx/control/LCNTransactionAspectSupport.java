@@ -13,7 +13,7 @@ public class LCNTransactionAspectSupport {
 
 
 
-    private static LCNTransactionAspectSupport instance = null;
+    private static volatile LCNTransactionAspectSupport instance = null;
 
     private LCNTransactionAspectSupport(){}
 

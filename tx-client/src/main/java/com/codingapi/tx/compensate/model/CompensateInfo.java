@@ -1,6 +1,7 @@
 package com.codingapi.tx.compensate.model;
 
 /**
+ * 补偿信息对象
  * create by lorne on 2017/11/13
  */
 public class CompensateInfo {

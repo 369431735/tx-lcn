@@ -40,7 +40,7 @@ public class TxStartTransactionServerImpl implements TransactionServer {
         final long start = System.currentTimeMillis();
 
         int state = 0;
-
+         //获取分布式事务组id
         final String groupId = TxCompensateLocal.current()==null?KidUtils.generateShortUuid():TxCompensateLocal.current().getGroupId();
 
         //创建事务组

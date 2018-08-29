@@ -11,6 +11,7 @@ public class TxServer {
     private int port;
     private String host;
     private int heart;
+    //延迟
     private int delay;
     private int compensateMaxWaitTime;
 
