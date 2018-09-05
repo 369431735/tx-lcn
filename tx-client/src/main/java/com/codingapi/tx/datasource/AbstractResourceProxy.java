@@ -20,7 +20,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public abstract class AbstractResourceProxy<C,T extends ILCNResource> implements ILCNTransactionControl {
 
-
+    /**
+     * key:groupId
+     */
     protected Map<String, ILCNResource> pools = new ConcurrentHashMap<>();
 
 
@@ -63,7 +65,12 @@ public abstract class AbstractResourceProxy<C,T extends ILCNResource> implements
         }
     };
 
-
+    /**
+     * 创建连接
+     * @param connection
+     * @param txTransactionLocal
+     * @return
+     */
     protected abstract C createLcnConnection(C connection, TxTransactionLocal txTransactionLocal);
 
     protected abstract void initDbType();
@@ -125,7 +132,11 @@ public abstract class AbstractResourceProxy<C,T extends ILCNResource> implements
     }
 
 
-
+    /**
+     * 初始化 事务 连接
+     * @param connection
+     * @return
+     */
     protected C initLCNConnection(C connection) {
         logger.debug("initLCNConnection");
         C lcnConnection = connection;

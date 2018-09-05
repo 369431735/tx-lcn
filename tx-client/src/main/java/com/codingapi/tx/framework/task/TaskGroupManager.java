@@ -7,6 +7,8 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
+ *
+ * 任务组管理
  * create by lorne on 2017/8/22
  */
 public class TaskGroupManager {

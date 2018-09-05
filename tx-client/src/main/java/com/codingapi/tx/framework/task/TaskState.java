@@ -1,6 +1,7 @@
 package com.codingapi.tx.framework.task;
 
 /**
+ * 任务状态
  * create by lorne on 2017/12/21
  */
 public enum TaskState {

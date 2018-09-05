@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 任务组
  * create by lorne on 2017/8/22
  */
 public class TaskGroup {
