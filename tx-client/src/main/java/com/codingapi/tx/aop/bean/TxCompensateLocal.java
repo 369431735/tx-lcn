@@ -1,7 +1,7 @@
 package com.codingapi.tx.aop.bean;
 
 /**
- * 分布式事务远程调用控制对象
+ * 分布式事务本地补偿
  * Created by lorne on 2017/6/5.
  */
 public class TxCompensateLocal {

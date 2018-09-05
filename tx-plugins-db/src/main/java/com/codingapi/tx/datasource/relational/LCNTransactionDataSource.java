@@ -24,7 +24,12 @@ public class LCNTransactionDataSource extends AbstractResourceProxy<Connection,L
     private org.slf4j.Logger logger = LoggerFactory.getLogger(LCNTransactionDataSource.class);
 
 
-
+    /**
+     * 创建连接
+     * @param connection
+     * @param txTransactionLocal
+     * @return
+     */
     @Override
     protected Connection createLcnConnection(Connection connection, TxTransactionLocal txTransactionLocal) {
         nowCount.getAndIncrement();
@@ -62,7 +67,7 @@ public class LCNTransactionDataSource extends AbstractResourceProxy<Connection,L
     public Connection getConnection(ProceedingJoinPoint point) throws Throwable {
         //说明有db操作.
         hasTransaction = true;
-
+        //设置数据类型为：数据库
         initDbType();
 
         Connection connection = (Connection)loadConnection();

@@ -95,7 +95,12 @@ public abstract class AbstractResourceProxy<C,T extends ILCNResource> implements
         return null;
     }
 
-
+    /***
+     * 创建连接
+     * @param txTransactionLocal
+     * @param connection
+     * @return
+     */
     private C createConnection(TxTransactionLocal txTransactionLocal, C connection){
         if (nowCount.get() == maxCount) {
             for (int i = 0; i < maxWaitTime; i++) {

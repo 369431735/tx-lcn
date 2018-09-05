@@ -6,9 +6,17 @@ package com.codingapi.tx.compensate.model;
  */
 public class CompensateInfo {
 
-
+    /**
+     * 当前时间
+     */
     private long currentTime;
+    /**
+     * 模块名
+     */
     private String modelName;
+    /**
+     * 唯一主键
+     */
     private String uniqueKey;
     private String data;
     private String methodStr;

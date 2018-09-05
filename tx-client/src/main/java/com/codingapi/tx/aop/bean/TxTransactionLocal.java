@@ -37,7 +37,7 @@ public class TxTransactionLocal {
     private boolean hasStart = false;
 
     /**
-     * 时候已经获取到连接对象
+     * 是否已经获取到连接对象
      */
     private boolean hasConnection = false;
 

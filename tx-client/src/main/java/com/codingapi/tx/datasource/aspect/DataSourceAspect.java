@@ -15,7 +15,9 @@ import java.sql.Connection;
  * create by lorne on 2018/1/5
  */
 
-
+/**
+ * 代理数据库连接
+ */
 @Aspect
 @Component
 public class DataSourceAspect {

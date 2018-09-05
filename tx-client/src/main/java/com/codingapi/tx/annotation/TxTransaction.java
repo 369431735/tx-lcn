@@ -3,6 +3,7 @@ package com.codingapi.tx.annotation;
 import java.lang.annotation.*;
 
 /**
+ * 分布式事务主要注解
  * Created by lorne on 2017/6/26.
  */
 @Target({ElementType.METHOD, ElementType.TYPE})
