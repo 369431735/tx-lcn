@@ -20,6 +20,15 @@ public class TxRunningNoTransactionServerImpl implements TransactionServer {
 
     private Logger logger = LoggerFactory.getLogger(TxRunningNoTransactionServerImpl.class);
 
+    /**
+     * @Description:  （无事务模块）执行事务
+     * @author      lixing
+     * @param point 切面信息
+     * @param info  分布式事务信息
+     * @return      java.lang.Object
+     * @exception
+     * @date        2018/9/6 15:31
+     */
     @Override
     public Object execute(final ProceedingJoinPoint point, final TxTransactionInfo info) throws Throwable {
 

@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.lang.StringUtils;
 
 /**
+ * 事务组
  * Created by lorne on 2017/6/7.
  */
 public class TxGroup {

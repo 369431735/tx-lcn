@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import java.sql.SQLException;
 
 /**
+ * 抽象事务线程
  * create by lorne on 2017/12/1
  */
 public abstract class AbstractTransactionThread {
@@ -45,11 +46,10 @@ public abstract class AbstractTransactionThread {
         Thread thread = new Thread(runnable);
         thread.start();
     }
-
-
     protected abstract void transaction() throws SQLException;
 
     protected abstract void closeConnection() throws SQLException;
+
 
     protected abstract void rollbackConnection() throws SQLException;
 }

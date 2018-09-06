@@ -24,7 +24,10 @@ public class ConfigReader {
     @Autowired
     private ApplicationContext spring;
 
-
+    /**
+     * 获取分布式事务服务器地址
+     * @return
+     */
     public String getTxUrl() {
 
         try {

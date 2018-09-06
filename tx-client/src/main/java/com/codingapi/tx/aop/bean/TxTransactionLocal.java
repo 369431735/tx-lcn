@@ -11,19 +11,28 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * 分布式事务远程调用控制对象
+ * 本地事务对象
  * Created by lorne on 2017/6/5.
  */
 public class TxTransactionLocal {
 
     private Logger logger = LoggerFactory.getLogger(TxTransactionLocal.class);
-
+    /**
+     * 当前线程的本地事务
+     */
     private final static ThreadLocal<TxTransactionLocal> currentLocal = new InheritableThreadLocal<TxTransactionLocal>();
-
+    /**
+     * 组id
+     */
     private String groupId;
-
+    /**
+     * 超时时间
+     */
     private int maxTimeOut;
 
+    /**
+     * 尚未明白该缓存信息的作用
+     */
     private Map<String,String> cacheModelInfo = new ConcurrentHashMap<>();
 
     /**

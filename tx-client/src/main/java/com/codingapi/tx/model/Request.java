@@ -3,6 +3,7 @@ package com.codingapi.tx.model;
 import com.lorne.core.framework.utils.KidUtils;
 
 /**
+ * 全局通信对象
  * Created by lorne on 2017/6/30.
  */
 public class Request {

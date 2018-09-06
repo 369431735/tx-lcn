@@ -4,6 +4,7 @@ package com.codingapi.tx.model;
 import com.alibaba.fastjson.JSONObject;
 
 /**
+ * 事务服务
  * Created by lorne on 2017/6/30.
  */
 public class TxServer {

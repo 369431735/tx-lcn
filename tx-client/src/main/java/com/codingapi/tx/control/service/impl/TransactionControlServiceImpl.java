@@ -24,12 +24,18 @@ public class TransactionControlServiceImpl implements TransactionControlService{
     private ApplicationContext spring;
 
 
-
+    /**
+     * 通知事务消息
+     * @param ctx netty渠道上下文
+     * @param resObj 回复内容
+     * @param json
+     */
     @Override
     public void notifyTransactionMsg(ChannelHandlerContext ctx,JSONObject resObj, String json) {
 
-
+        //获取指令 目前有c(补偿指令)  t(提交指令)
         String action = resObj.getString("a");
+        //获取标志
         String key = resObj.getString("k");
 
         IActionService actionService = spring.getBean(action, IActionService.class);

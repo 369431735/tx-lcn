@@ -20,6 +20,7 @@ import java.util.concurrent.*;
 
 
 /**
+ * LCN 数据库连接
  * create by lorne on 2017/7/29
  */
 

@@ -15,7 +15,9 @@ public class TxTransactionInfo {
      */
     private TxTransaction transaction;
 
-
+    /**
+     * 本地事务对象
+     */
     private TxTransactionLocal txTransactionLocal;
 
     /**
@@ -23,7 +25,9 @@ public class TxTransactionInfo {
      */
     private String txGroupId;
 
-
+    /**
+     * 分布式事务调用器
+     */
     private TransactionInvocation invocation;
 
 

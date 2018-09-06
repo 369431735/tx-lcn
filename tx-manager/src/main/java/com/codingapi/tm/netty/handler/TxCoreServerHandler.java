@@ -46,12 +46,7 @@ public class TxCoreServerHandler extends ChannelInboundHandlerAdapter { // (1)
     public void channelRead(final ChannelHandlerContext ctx, Object msg) throws Exception {
         final String json = SocketUtils.getJson(msg);
         logger.debug("request->"+json);
-        threadPool.execute(new Runnable() {
-            @Override
-            public void run() {
-                service(json,ctx);
-            }
-        });
+        threadPool.execute(()->{ service(json,ctx);});
     }
 
     private void service(String json,ChannelHandlerContext ctx){
@@ -71,7 +66,6 @@ public class TxCoreServerHandler extends ChannelInboundHandlerAdapter { // (1)
             resObj.put("d", res);
 
             SocketUtils.sendMsg(ctx,resObj.toString());
-
         }
     }
 

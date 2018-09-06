@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
+ * 分布式事务消息处理实现
  * Created by lorne on 2017/6/30.
  */
 @Service
@@ -36,7 +37,10 @@ public class MQTxManagerServiceImpl implements MQTxManagerService {
     @Autowired
     private TxManagerHttpRequestHelper managerHelper;
 
-
+    /**
+     * 创建事务组
+     * @param groupId 事务组id 当为补偿模式时将会自动获取补偿的groupId
+     */
     @Override
     public void createTransactionGroup(String groupId) {
         JSONObject jsonObject = new JSONObject();
@@ -44,7 +48,14 @@ public class MQTxManagerServiceImpl implements MQTxManagerService {
         Request request = new Request("cg", jsonObject.toString());
         SocketManager.getInstance().sendMsg(request);
     }
-
+    /**
+     * 添加事务组子对象
+     * @param groupId   事务组id
+     * @param taskId    任务Id
+     * @param isGroup   是否合并到事务组 true合并 false不合并
+     * @param methodStr   方法参数列表
+     * @return  事务组TxGroup
+     */
     @Override
     public TxGroup addTransactionGroup(String groupId, String taskId, boolean isGroup, String methodStr) {
         JSONObject jsonObject = new JSONObject();
@@ -57,7 +68,13 @@ public class MQTxManagerServiceImpl implements MQTxManagerService {
         return TxGroup.parser(json);
     }
 
-
+    /**
+     * 关闭事务组-进入事务提交第一阶段
+     *
+     * @param groupId   事务组id
+     * @param state     提交或者回滚 1提交0回滚
+     * @return 1 成功 0失败 -1 事务强制回滚
+     */
     @Override
     public int closeTransactionGroup(final String groupId, final int state) {
         JSONObject jsonObject = new JSONObject();
@@ -72,7 +89,9 @@ public class MQTxManagerServiceImpl implements MQTxManagerService {
         }
     }
 
-
+    /***
+     * 上传模块信息
+     */
     @Override
     public void uploadModelInfo() {
         JSONObject jsonObject = new JSONObject();
@@ -82,7 +101,12 @@ public class MQTxManagerServiceImpl implements MQTxManagerService {
         Request request = new Request("umi", jsonObject.toString());
         String json = SocketManager.getInstance().sendMsg(request);
     }
-
+    /**
+     * 检查事务状态 通过netty管道
+     * @param groupId   事务组id
+     * @param taskId    任务id
+     * @return  事务状态
+     */
     @Override
     public int cleanNotifyTransaction(String groupId, String taskId) {
         JSONObject jsonObject = new JSONObject();
@@ -97,7 +121,12 @@ public class MQTxManagerServiceImpl implements MQTxManagerService {
         }
     }
 
-
+    /**
+     * 检查并清理事务数据
+     * @param groupId   事务组id
+     * @param waitTaskId    任务id
+     * @return  事务状态
+     */
     @Override
     public int cleanNotifyTransactionHttp(String groupId, String waitTaskId) {
         String url = configReader.getTxUrl() + "cleanNotifyTransactionHttp?groupId=" + groupId + "&taskId=" + waitTaskId;
@@ -108,13 +137,22 @@ public class MQTxManagerServiceImpl implements MQTxManagerService {
         return  clearRes.contains("true") ? 1 : 0;
     }
 
-
+    /**
+     * 获取TM服务地址
+     * @return txServer
+     */
     @Override
     public String httpGetServer() {
         String url = configReader.getTxUrl() + "getServer";
         return managerHelper.httpGet(url);
     }
-
+    /**
+     * 记录补偿事务数据到tm
+     * @param groupId   事务组Id
+     * @param time  执行时间
+     * @param info  事务信息
+     * @param startError 启动模块db执行异常
+     */
     @Override
     public void sendCompensateMsg(String groupId, long time, TxTransactionInfo info,int startError) {
 

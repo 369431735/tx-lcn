@@ -29,8 +29,15 @@ public class TxStartTransactionServerImpl implements TransactionServer {
 
     @Autowired
     protected MQTxManagerService txManagerService;
-
-
+    /**
+     * @Description:  执行事务(分布式事务开启方)
+     * @author      lixing
+     * @param point 切面信息
+     * @param info  分布式事务信息
+     * @return      java.lang.Object
+     * @exception
+     * @date        2018/9/6 15:31
+     */
     @Override
     public Object execute(ProceedingJoinPoint point,final TxTransactionInfo info) throws Throwable {
         //分布式事务开始执行

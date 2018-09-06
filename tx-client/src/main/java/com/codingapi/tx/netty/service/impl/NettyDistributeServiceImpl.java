@@ -35,6 +35,9 @@ public class NettyDistributeServiceImpl implements NettyDistributeService {
         }
     }
 
+    /***
+     * 获取分布式事务服务器
+     */
     private void getTxServer() {
         //获取负载均衡服务地址
         String json = null;

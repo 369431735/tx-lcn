@@ -54,12 +54,7 @@ public class TransactionHandler extends ChannelInboundHandlerAdapter {
 
         logger.debug("TxManager-response->" + json);
 
-        threadPool.execute(new Runnable() {
-            @Override
-            public void run() {
-                nettyControlService.executeService(ctx, json);
-            }
-        });
+        threadPool.execute(()->{ nettyControlService.executeService(ctx, json);});
     }
 
     @Override
