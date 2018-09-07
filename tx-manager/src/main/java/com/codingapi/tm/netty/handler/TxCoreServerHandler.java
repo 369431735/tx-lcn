@@ -25,7 +25,7 @@ import java.util.concurrent.Executor;
  * Handles a server-side channel.
  */
 
-@ChannelHandler.Sharable
+@ChannelHandler.Sharable //多个channel共享变量
 public class TxCoreServerHandler extends ChannelInboundHandlerAdapter { // (1)
 
     private NettyService nettyService;

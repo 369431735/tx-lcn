@@ -49,7 +49,9 @@ public class NettyServerServiceImpl implements NettyServerService,DisposableBean
     @Autowired
     private ConfigReader configReader;
 
-
+    /**
+     * 开启netty服务
+     */
     @Override
     public void start() {
         final int heartTime = configReader.getTransactionNettyHeartTime()+10;

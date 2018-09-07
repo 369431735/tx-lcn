@@ -8,18 +8,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 事务组信息
  * Created by lorne on 2017/6/7.
  */
 public class TxGroup {
-
+    /**
+     * 组id
+     */
     private String groupId;
-
+    /**
+     * 开始时间
+     */
     private long startTime;
-
+    /**
+     * 当前时间
+     */
     private long nowTime;
-
+    /**
+     * 状态
+     */
     private int state;
-
+    /**
+     * 完成状态
+     */
     private int hasOver;
 
     /**
