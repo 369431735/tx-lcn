@@ -24,7 +24,12 @@ public class TransactionAspect implements Ordered {
     @Autowired
     private TxManagerInterceptor txManagerInterceptor;
 
-
+    /**
+     * 注解前置操作
+     * @param point
+     * @return
+     * @throws Throwable
+     */
     @Around("@annotation(com.codingapi.tx.annotation.TxTransaction)")
     public Object transactionRunning(ProceedingJoinPoint point)throws Throwable{
         logger.debug("annotation-TransactionRunning-start---->");

@@ -18,7 +18,12 @@ public class TxManagerInterceptor {
     @Autowired
     private AspectBeforeService aspectBeforeService;
 
-
+    /***
+     * 注解前置操作
+     * @param point
+     * @return
+     * @throws Throwable
+     */
     public Object around(ProceedingJoinPoint point) throws Throwable {
 
         String groupId = null;

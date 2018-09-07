@@ -28,6 +28,8 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 /**
  * create by lorne on 2017/11/11
@@ -52,7 +54,11 @@ public class CompensateServiceImpl implements CompensateService {
 
 
     private Executor threadPool = Executors.newFixedThreadPool(20);
-
+    /**
+     * 储存补偿数据
+     * @param transactionCompensateMsg
+     * @return
+     */
     @Override
     public boolean saveCompensateMsg(final TransactionCompensateMsg transactionCompensateMsg) {
 
@@ -72,7 +78,7 @@ public class CompensateServiceImpl implements CompensateService {
         final String json = JSON.toJSONString(transactionCompensateMsg);
 
         logger.info("Compensate->" + json);
-
+        //存储补偿数据
         final String compensateKey = compensateDao.saveCompensateMsg(transactionCompensateMsg);
 
         //调整自动补偿机制，若开启了自动补偿，需要通知业务返回success，方可执行自动补偿
@@ -165,31 +171,20 @@ public class CompensateServiceImpl implements CompensateService {
     @Override
     public List<ModelName> loadModelList() {
         List<String> keys =  compensateDao.loadCompensateKeys();
-
-        Map<String,Integer> models = new HashMap<String, Integer>();
-
-        for(String key:keys){
-            if(key.length()>36){
-                String name =  key.substring(11,key.length()-25);
-                int v = 1;
-                if(models.containsKey(name)){
-                    v =  models.get(name)+1;
-                }
-                models.put(name,v);
-            }
-        }
-        List<ModelName> names = new ArrayList<>();
-
-        for(String key:models.keySet()){
-            int v = models.get(key);
-            ModelName modelName = new ModelName();
-            modelName.setName(key);
-            modelName.setCount(v);
-            names.add(modelName);
-        }
+        final Map<String,List<String>> models  =keys.stream().filter(key ->key.length()>36).collect(Collectors.groupingBy(key->  key.substring(11,key.length()-25)));
+        List<ModelName> names=models.entrySet().stream().map(e->{
+            ModelName modelName=new ModelName();
+            modelName.setName(e.getKey());
+            modelName.setCount(e.getValue().size());
+            return modelName;
+        }).collect(Collectors.toList());
         return names;
     }
-
+    /***
+     * 根据模块名查询补偿事务永久存储数据
+     * @param model
+     * @return
+     */
     @Override
     public List<String> loadCompensateTimes(String model) {
         return compensateDao.loadCompensateTimes(model);
@@ -231,18 +226,32 @@ public class CompensateServiceImpl implements CompensateService {
         });
         return models;
     }
-
+    /***
+     * 查询是是否有需要补偿的数据
+     * @return
+     */
     @Override
     public boolean hasCompensate() {
         return compensateDao.hasCompensate();
     }
-
+    /**
+     * 删除补偿数据
+     * @param path
+     * @return
+     */
     @Override
     public boolean delCompensate(String path) {
         compensateDao.deleteCompensateByPath(path);
         return true;
     }
-
+    /**
+     * @Description: 补偿请求，加载历史数据
+     * @author      lixing
+     * @param txGroup
+     * @return      void
+     * @exception
+     * @date        2018/9/7 15:34
+     */
     @Override
     public void reloadCompensate(TxGroup txGroup) {
         TxGroup compensateGroup = getCompensateByGroupId(txGroup.getGroupId());
@@ -291,6 +300,12 @@ public class CompensateServiceImpl implements CompensateService {
         return JSON.parseObject(txGroup, TxGroup.class);
     }
 
+    /**
+     * 执行补偿数据
+     * @param path
+     * @return
+     * @throws ServiceException
+     */
 
     @Override
     public boolean executeCompensate(String path) throws ServiceException {

@@ -29,6 +29,13 @@ public class AspectBeforeServiceImpl implements AspectBeforeService {
 
     private Logger logger = LoggerFactory.getLogger(AspectBeforeServiceImpl.class);
 
+    /**
+     * 注解前置操作
+     * @param groupId
+     * @param point
+     * @return
+     * @throws Throwable
+     */
 
     @Override
     public Object around(String groupId, ProceedingJoinPoint point) throws Throwable {

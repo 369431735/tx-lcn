@@ -50,7 +50,9 @@ public class TxTransactionLocal {
      */
     private boolean hasConnection = false;
 
-
+    /**
+      * 一个短uuid暂时不知道有什么用
+      */
     private String kid;
      //目前看到的只有"datasource"
     private String type;

@@ -48,7 +48,10 @@ public class ApiTxManagerServiceImpl implements ApiTxManagerService {
         return managerService.cleanNotifyTransaction(groupId,taskId);
     }
 
-
+    /**
+     * 储存补偿数据
+     * @return
+     */
     @Override
     public boolean sendCompensateMsg(long currentTime, String groupId, String model, String address, String uniqueKey, String className, String methodStr, String data, int time,int startError) {
         TransactionCompensateMsg transactionCompensateMsg = new TransactionCompensateMsg(currentTime, groupId, model, address, uniqueKey, className, methodStr, data, time, 0,startError);

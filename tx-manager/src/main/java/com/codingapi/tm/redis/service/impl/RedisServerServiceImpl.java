@@ -29,7 +29,11 @@ public class RedisServerServiceImpl implements RedisServerService{
     @Autowired
     private ConfigReader configReader;
 
-
+    /***
+     * 查询补偿事务永久存储数据
+     * @return
+     */
+    @Override
     public String loadNotifyJson() {
         Set<String> keys =  redisTemplate.keys(configReader.getKeyPrefixCompensate()+"*");
         ValueOperations<String,String> value =  redisTemplate.opsForValue();
@@ -71,10 +75,7 @@ public class RedisServerServiceImpl implements RedisServerService{
     @Override
     public List<String> getKeys(String key) {
         Set<String> keys = redisTemplate.keys(key);
-        List<String> list = new ArrayList<String>();
-        for (String k : keys) {
-            list.add(k);
-        }
+        List<String> list = new ArrayList<String>(keys);
         return list;
     }
 

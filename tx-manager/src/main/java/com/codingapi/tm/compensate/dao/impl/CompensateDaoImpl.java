@@ -25,7 +25,11 @@ public class CompensateDaoImpl implements CompensateDao {
     @Autowired
     private ConfigReader configReader;
 
-
+    /**
+     * 储存补偿数据
+     * @param transactionCompensateMsg
+     * @return
+     */
     @Override
     public String saveCompensateMsg(TransactionCompensateMsg transactionCompensateMsg) {
 
@@ -38,21 +42,31 @@ public class CompensateDaoImpl implements CompensateDao {
         return name;
     }
 
-
+    /***
+     * 获得补偿数据的key
+     * @return
+     */
     @Override
     public List<String> loadCompensateKeys() {
         String key = configReader.getKeyPrefixCompensate() + "*";
         return redisServerService.getKeys(key);
     }
 
-
+    /***
+     * 查询是是否有需要补偿的数据
+     * @return
+     */
     @Override
     public boolean hasCompensate() {
         String key = configReader.getKeyPrefixCompensate() + "*";
         List<String> keys = redisServerService.getKeys(key);
         return keys != null && keys.size() > 0;
     }
-
+    /***
+     * 根据模块名查询补偿事务永久存储数据
+     * @param model
+     * @return
+     */
     @Override
     public List<String> loadCompensateTimes(String model) {
         String key = configReader.getKeyPrefixCompensate() + model + ":*";
@@ -84,7 +98,14 @@ public class CompensateDaoImpl implements CompensateDao {
         return redisServerService.getValueByKey(key);
     }
 
-
+    /**
+     * @Description: 删除补偿数据
+     * @author      lixing
+     * @param path
+     * @return      void
+     * @exception
+     * @date        2018/9/7 15:39
+     */
     @Override
     public void deleteCompensateByPath(String path) {
         String key = String.format("%s%s.json", configReader.getKeyPrefixCompensate(), path);

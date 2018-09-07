@@ -82,7 +82,7 @@ public class AdminController {
     }
 
     /***
-     *
+     *补偿数据
      * @param path
      * @return
      * @throws ServiceException
